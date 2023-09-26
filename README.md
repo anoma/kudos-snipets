@@ -1,0 +1,2 @@
+In this repository you can find a [pseudocode explanation](resource_logic.md) of the Kudo application,
+as well as an example [Intent and Solver](intents_stand_mix.ipynb) in the form of a jupyter notebook.
