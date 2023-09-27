@@ -44,6 +44,7 @@ struct PTX {
 
 // Note: the execution environment (env) needs to provide the hash of each resource_logic to the respective predicates (hash_self), since they need it for verification, but we can't hash(self) within self, because self.hash(self) is not a fixed point  
 
+// The following is called at validation time (taiga to be used in the shielded case).
 fn kudo_logic(ptx: Ptx) -> bool {
     for ri in ptx.resources.input {
         if ri.predicate == env.hash_self { // if the Resource is a Kudo
@@ -156,7 +157,8 @@ enum ResourceIntentElement { // TODO: Find a better name, if we think this is an
 // TODO: We should specify this more precisely, e.g. via a BNF
 type Connective = Term;
 
-
+// Intents like the following (or a flat string representation as above) would be generated to be ingested by solvers, 
+// which in turn produce transactions to be validated. Validation and solving time should be fully disjoint in practice. 
 struct ResourceIntent {
     have: Vec<(Weight, ResourceIntentElement)>,
     want: Vec<(Weight, ResourceIntentElement)>,
