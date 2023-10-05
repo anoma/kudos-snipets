@@ -42,7 +42,21 @@ struct PTX {
     extra_data: Vec<Byte>,
 }
 
-// Note: the execution environment (env) needs to provide the hash of each resource_logic to the respective predicates (hash_self), since they need it for verification, but we can't hash(self) within self, because self.hash(self) is not a fixed point  
+// Evaluation context
+// The evaluation context (ctx) consists of a single PTX and some "system calls" providing extra functionality 
+// we do not want to, or can not implement inside of a resource logic.
+// During evaluation, the predicates from all resources get applied to the PTX one after another.
+//
+// "Syscalls":
+// - self_hash: since some logics will need to know about their own hash/address, and trying to compute the hash from 
+//   inside the logic ("self.hash(self)") is not possible since there is no fixed point, the ctx needs to provide the 
+//   hash of each resource_logic to itself. 
+//   The ctx would then replace the term "self_hash" in a resource_logic by the corresponding hash during evaluation.
+// - verify: since we do not want to implement cryptographic primitives in the logics, the ctx should provide them by 
+//   taking (Data, Key) as arguments and returning Bool. For the prototype, keys can be of type Bool with 
+//   check_signature just returning the value from the key.
+
+
 
 // The following is called at validation time (taiga to be used in the shielded case).
 fn kudo_logic(ptx: Ptx) -> bool {
