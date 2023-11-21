@@ -3,18 +3,18 @@ hide:
   - navigation
 ---
 
-# Kudos as resources in Juvix
+# Kudos as resources in Juvix (WIP)
+
+This code was typechecked using Juvix v0.5.4.
 
 ```juvix 
-module index;
+module kudos;
 
 import Stdlib.Prelude open;
 import Data.Set as Set open; 
 ```
 
 ## Basic types
-
-For demostration purposes, we define a few aliases for types such as `Hash` and `Bytes` that are not primitive yet in Juvix.
 
 ```juvix
 syntax alias Predicate := Nat;
@@ -63,12 +63,6 @@ module Kudo;
 end;
 ```
 
-Veriable in this context would be any type accompanyed with
-a predicate, a function called `verify` that takes in a term of the given type
-and spits out true or false.  We do this since we do not want to implement cryptographic primitives in the logics and the given context (`Env`) should provide them by
-taking.
-
-
 ```juvix
 trait
 type isVerifiable (A : Type) :=
@@ -103,10 +97,6 @@ syntax alias PTX := PartialTransaction;
 ```
 
 ## Evaluation context
-
-The evaluation context (ctx) consists of a single PTX and some "system calls" providing extra functionality 
-we do not want to, or can not implement inside of a resource logic.
-During evaluation, the predicates from all resources get applied to the PTX one after another.
 
 ```juvix
 axiom env : Kudo.Env;
