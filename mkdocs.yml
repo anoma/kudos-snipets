@@ -1,4 +1,5 @@
 site_name: Kudos-example
+site_url: https://anoma.github.io/kudos-snippets/
 repo_url: https://github.com/anoma/kudos-snippets
 nav:
   - index.juvix.md
