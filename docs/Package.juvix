@@ -6,11 +6,13 @@ package : Package :=
   defaultPackage
     {name := "resource-logic";
      version := mkVersion 0 0 1;
-     dependencies := [ github
-                       "anoma"
-                       "juvix-containers"
-                       "3debbc7f5776924eb9652731b3c1982a2ee0ff24"
-                     ; github
+     dependencies := [ 
+      -- github
+                      --  "anoma"
+                      --  "juvix-containers"
+                      --  "3debbc7f5776924eb9652731b3c1982a2ee0ff24"
+                    --  ; 
+                     github
                        "anoma"
                        "juvix-stdlib"
                        "v0.0.1"

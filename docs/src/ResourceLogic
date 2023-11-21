@@ -48,71 +48,18 @@ module Kudo;
 -- TODO
 end;
 
-trait
-type isVerifiable (A : Type) :=
-  mkVerifiable {verify : A -> Bool};
-
-open isVerifiable;
-
--- Value can be verified, say, trivially for the moment.
-instance
-valueIsVerifiable : isVerifiable Kudo.Value :=
-  mkVerifiable (verify := \ {_ := true});
 
 -- TODO
-kudoIsVerifiable : isVerifiable Kudo.Resource :=
-  mkVerifiable
-    (verify := \ {k := verify (Kudo.Resource.value k)});
+
 
 --- PTX
-type PartialTransaction :=
-  mkPartialTransaction {
-    input : List Kudo.Resource;
-    output : List Kudo.Resource;
-    extra : Bytes
-  };
 
-open PartialTransaction;
+
 
 {-
 Note: the execution environment (env) needs to provide the hash of each resource_logic to the respective predicates (hash_self), since they need it for verification, but we can't hash(self) within self, because self.hash(self) is not a fixed point
 -}
 
-axiom env : Kudo.Env;
-
-axiom ! : {A : Type} -> A;
-
--- The following is called at validation time (taiga to be used in the shielded case).
-
-kudo_logic (ptx : PartialTransaction) : Bool :=
-  let
-    checkInputs : Bool :=
-      all
-        λ {ri :=
-          let
-            cond1 : Bool := member? (Kudo.Resource.predicate ri) env;
-            cond2 : _ := true;
-            cond3 : _ := true;
-          in cond1 && not (cond2 || cond3)}
-        (input ptx);
-    checkOutput : Bool :=
-      all
-        λ {ri :=
-          let
-            cond1 : Bool := member? (Kudo.Resource.predicate ri) env;
-            cond2 : _ := true;
-            cond3 : _ := true;
-          in cond1 && not (cond2 || cond3)}
-        (output ptx);
-    checkConnectiveValidity : Bool := true;
-  in checkInputs && checkOutput && checkConnectiveValidity;
-
--- insert kudo_logic in the set, 
--- or better use a map instead
-
-instance
-partialVerifiable : isVerifiable PartialTransaction :=
-  mkVerifiable (verify := kudo_logic);
 
 axiom agentA : Owner;
 

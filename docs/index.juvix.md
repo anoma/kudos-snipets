@@ -1,3 +1,9 @@
+---
+hide:
+  - navigation
+---
+
+
 # Kudos as Resources
 
 ##  Multi-Agent, Multi-Resource swaps over Resource Types tied to Identities
@@ -9,7 +15,7 @@ module index;
 
 import Stdlib.Prelude open;
 
-import Data.Set as Set open using {Set; member?};
+-- import Data.Set as Set open using {Set; member?};
 ```
 
 
@@ -60,7 +66,7 @@ module Kudo;
       originator : Signature
     };
 
-  Env : Type := Set Predicate;
+  -- Env : Type := Set Predicate;
 end;
 ```
 
@@ -114,7 +120,7 @@ The ctx would then replace the term "self_hash" in a resource_logic by the corre
 taking (Data, Key) as arguments and returning Bool. For the prototype, keys can be of type Bool with 
 check_signature just returning the value from the key.
 
-```juvix
+```text
 
 axiom env : Kudo.Env;
 
@@ -215,7 +221,7 @@ A general Intent would look like this:
 
 - *Note*: We might also introduce HaveResourceType later, in case agents want to publish intents e.g. for 3rd parties to perform a swap.
 
-```
+```text
 type Weight = Float;
 
 enum ResourceIntentElement { // TODO: Find a better name, if we think this is an important object 

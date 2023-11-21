@@ -160,4 +160,4 @@ cython_debug/
 #.idea/
 site/
 **/.juvix-build/
-**/.juvix-mkdocs/
+**/.juvix-mkdocs/**
