@@ -1,0 +1,46 @@
+site_name: Kudos-example
+repo_url: https://github.com/anoma/kudos-snippets
+nav:
+  - index.juvix.md
+theme: 
+  name: material
+  features:
+    - content.code.copy 
+    - content.action.edit
+    - content.action.view
+plugins:
+  - search
+  - juvix
+exclude_docs: |
+  /requirements.txt  
+  **/.juvix-build/**
+extra_css:
+  - assets/css/extra.css
+  - assets/css/juvix-highlighting.css
+  - https://cdn.jsdelivr.net/npm/highlightjs-juvix/dist/juvix.css
+
+# Not essential but nice to have
+markdown_extensions:
+  - abbr
+  - admonition
+  - toc:
+      permalink: true
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: juvix-standalone
+          class: juvix-standalone
+          format: !!python/name:mkdocs_juvix.standalone.render
+  - pymdownx.snippets
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.highlight:
+      use_pygments: true
+      auto_title: false
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true

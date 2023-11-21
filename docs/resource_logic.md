@@ -5,7 +5,6 @@ What follows is an explanation of the encoding of Kudos and Intents over them as
 ```rust
 // Kudos
 // Multi-Agent, Multi-Resource swaps over Resource Types tied to Identities
-
 // -- Kudos as Resources --
 
 struct KudoResource {
@@ -162,8 +161,8 @@ enum ResourceIntentElement { // TODO: Find a better name, if we think this is an
 //
 // let have0..2, want0..2 be ResourceIntentElements
 //
-// have: (have0) XOR (have1 OR have2)
-// want: (want0 OR want1) XOR (want2)
+// have: (have 0) XOR (have 1 OR have 2)
+// want: (want 0 OR want 1) XOR (want2 )
 //
 // During validation of the connective, only the Resource(Type) and have/want property should be relevant, 
 // i.e. validation should be invariant against the relative positions of haveI, haveJ. 

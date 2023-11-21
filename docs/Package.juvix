@@ -1,0 +1,11 @@
+module Package;
+
+import PackageDescription.V1 open;
+
+package : Package :=
+  defaultPackage
+    {name := "resource-logic";
+     version := mkVersion 0 0 1;
+     dependencies := [ github "anoma" "juvix-stdlib" "v0.0.1"
+                     ; github "anoma" "juvix-containers" "v0.8.0"
+                     ]};
