@@ -1,8 +1,13 @@
 site_name: Kudos-example
 repo_url: https://github.com/anoma/kudos-snippets
 nav:
-  - Home: index.juvix.md
-theme: material 
+  - index.juvix.md
+theme: 
+  name: material
+  features:
+    - content.code.copy 
+    - content.action.edit
+    - content.action.view
 plugins:
   - search
   - juvix
@@ -14,17 +19,12 @@ extra_css:
   - assets/css/juvix-highlighting.css
   - https://cdn.jsdelivr.net/npm/highlightjs-juvix/dist/juvix.css
 
+# Not essential but nice to have
 markdown_extensions:
   - abbr
   - admonition
-  - attr_list
-  - def_list
-  - footnotes
-  - md_in_html
   - toc:
       permalink: true
-  - tables
-  - pymdownx.betterem
   - pymdownx.details
   - pymdownx.superfences:
       custom_fences:
@@ -37,16 +37,9 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.arithmatex:
       generic: true
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
-      options:
-        custom_icons:
-          - overrides/.icons
   - pymdownx.highlight:
       use_pygments: true
       auto_title: false
-  - pymdownx.keys
   - pymdownx.tabbed:
       alternate_style: true
   - pymdownx.tasklist:
