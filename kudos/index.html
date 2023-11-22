@@ -1,0 +1,712 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://anoma.github.io/kudos-snippets/kudos.juvix/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../resource_logic/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.4.10">
+    
+    
+      
+        <title>Kudos as resources in Juvix (WIP) - Kudos-example</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fad675c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/css/extra.css">
+    
+      <link rel="stylesheet" href="../assets/css/juvix-highlighting.css">
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlightjs-juvix/dist/juvix.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#kudos-as-resources-in-juvix-wip" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Kudos-example" class="md-header__button md-logo" aria-label="Kudos-example" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Kudos-example
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Kudos as resources in Juvix (WIP)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/anoma/kudos-snippets" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Kudos-example" class="md-nav__button md-logo" aria-label="Kudos-example" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Kudos-example
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/anoma/kudos-snippets" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Kudos, an intent application
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Kudos as resources in Juvix (WIP)
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Kudos as resources in Juvix (WIP)
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partial-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partial transactions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluation context
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluation context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intents-over-kudos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intents over Kudos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../resource_logic/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Resource Logic
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#basic-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom types
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom types">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#partial-transactions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partial transactions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#evaluation-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Evaluation context
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Evaluation context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#intents-over-kudos" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intents over Kudos
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+    <a href="https://github.com/anoma/kudos-snippets/edit/main/docs/kudos.juvix.md" title="Edit this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
+    </a>
+  
+  
+    
+      
+    
+    <a href="https://github.com/anoma/kudos-snippets/raw/main/docs/kudos.juvix.md" title="View source of this page" class="md-content__button md-icon">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
+    </a>
+  
+
+
+<h1 id="kudos-as-resources-in-juvix-wip">Kudos as resources in Juvix (WIP)<a class="headerlink" href="#kudos-as-resources-in-juvix-wip" title="Permanent link">&para;</a></h1>
+<p>This code was typechecked using Juvix v0.5.4.</p>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">module</span> <span id="0"><span class="annot"><a href="#0"><span class="annot"><a href="#0"><span class="ju-var">kudos</span></a></span></a></span></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">import</span> <span class="annot"><a href="#1"><span class="ju-var">Stdlib<span class="ju-delimiter">.</span>Prelude</span></a></span> <span class="ju-keyword">open</span><span class="ju-delimiter">;</span>
+<span class="ju-keyword">import</span> <span class="annot"><a href="#740"><span class="ju-var">Data<span class="ju-delimiter">.</span>Set</span></a></span> <span class="ju-keyword">as</span> <span id="740"><span class="annot"><a href="#740"><span class="annot"><a href="#740"><span class="ju-var">Set</span></a></span></a></span></span> <span class="ju-keyword">open</span><span class="ju-delimiter">;</span>
+</pre></code></pre>
+
+<h2 id="basic-types">Basic types<a class="headerlink" href="#basic-types" title="Permanent link">&para;</a></h2>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#931"><span class="ju-var">Predicate</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#932"><span class="ju-var">Hash</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#933"><span class="ju-var">Field</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#934"><span class="ju-var">Signature</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#935"><span class="ju-var">Key</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span id="936"><span class="annot"><a href="#936"><span class="annot"><a href="#936"><span class="ju-function">Byte</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#111"><span class="ju-inductive">Nat</span></a></span><span class="ju-delimiter">;</span>
+
+<span id="937"><span class="annot"><a href="#937"><span class="annot"><a href="#937"><span class="ju-function">Bytes</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#936"><span class="ju-function">Byte</span></a></span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<h2 id="custom-types">Custom types<a class="headerlink" href="#custom-types" title="Permanent link">&para;</a></h2>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">type</span> <span id="938"><span class="annot"><a href="#938"><span class="annot"><a href="#938"><span class="ju-inductive">Owner</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span id="939"><span class="annot"><a href="#939"><span class="annot"><a href="#939"><span class="ju-constructor">mkOwner</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+    <span class="annot"><a href="#947"><span class="ju-var">identity</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#943"><span class="ju-inductive">ExternalIdentity</span></a></span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#948"><span class="ju-var">signature</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span>
+  <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">type</span> <span id="943"><span class="annot"><a href="#943"><span class="annot"><a href="#943"><span class="ju-inductive">ExternalIdentity</span></a></span></a></span></span> <span class="ju-keyword">:=</span> <span id="944"><span class="annot"><a href="#944"><span class="annot"><a href="#944"><span class="ju-constructor">mkExternalIdentity</span></a></span></a></span></span> <span class="ju-delimiter">{</span><span class="annot"><a href="#949"><span class="ju-var">key</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#935"><span class="ju-inductive">Key</span></a></span><span class="ju-delimiter">}</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">module</span> <span id="969"><span class="annot"><a href="#969"><span class="annot"><a href="#969"><span class="ju-var">Kudo</span></a></span></a></span></span><span class="ju-delimiter">;</span>
+  <span class="ju-keyword">type</span> <span id="950"><span class="annot"><a href="#950"><span class="annot"><a href="#950"><span class="ju-inductive">Resource</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+    <span id="951"><span class="annot"><a href="#951"><span class="annot"><a href="#951"><span class="ju-constructor">mkResource</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+      <span class="annot"><a href="#963"><span class="ju-var">label</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#932"><span class="ju-inductive">Hash</span></a></span><span class="ju-delimiter">;</span>
+      <span class="annot"><a href="#964"><span class="ju-var">predicate</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#931"><span class="ju-inductive">Predicate</span></a></span><span class="ju-delimiter">;</span>
+      <span class="annot"><a href="#965"><span class="ju-var">quantity</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#933"><span class="ju-inductive">Field</span></a></span><span class="ju-delimiter">;</span>
+      <span class="annot"><a href="#966"><span class="ju-var">value</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#957"><span class="ju-inductive">Value</span></a></span>
+    <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+
+  <span class="ju-keyword">type</span> <span id="957"><span class="annot"><a href="#957"><span class="annot"><a href="#957"><span class="ju-inductive">Value</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+    <span id="958"><span class="annot"><a href="#958"><span class="annot"><a href="#958"><span class="ju-constructor">mkValue</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+      <span class="annot"><a href="#967"><span class="ju-var">owner</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#938"><span class="ju-inductive">Owner</span></a></span><span class="ju-delimiter">;</span>
+      <span class="annot"><a href="#968"><span class="ju-var">originator</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span>
+    <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+  <span id="962"><span class="annot"><a href="#962"><span class="annot"><a href="#962"><span class="ju-function">
+  Env</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#926"><span class="ju-inductive">Set</span></a></span> <span class="annot"><a href="#931"><span class="ju-inductive">Predicate</span></a></span><span class="ju-delimiter">;</span>
+<span class="ju-keyword">end</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">trait</span>
+<span class="ju-keyword">type</span> <span id="970"><span class="annot"><a href="#970"><span class="annot"><a href="#970"><span class="ju-inductive">isVerifiable</span></a></span></a></span></span> <span id="974"><span class="annot"><a href="#974"><span class="annot"><a href="#974"><span class="ju-var"><span class="ju-delimiter">(</span>A</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span><span class="ju-delimiter">)</span> <span class="ju-keyword">:=</span> <span id="971"><span class="annot"><a href="#971"><span class="annot"><a href="#971"><span class="ju-constructor">mkVerifiable</span></a></span></a></span></span> <span class="ju-delimiter">{</span><span class="annot"><a href="#975"><span class="ju-var">verify</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#974"><span class="ju-var">A</span></a></span> <span class="ju-keyword">-&gt;</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span><span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">open</span> <span class="annot"><a href="#973"><span class="ju-var">isVerifiable</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">instance</span>
+<span id="976"><span class="annot"><a href="#976"><span class="annot"><a href="#976"><span class="ju-function">valueIsVerifiable</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#970"><span class="ju-inductive">isVerifiable</span></a></span> <span class="annot"><a href="#957"><span class="ju-inductive">Kudo<span class="ju-delimiter">.</span>Value</span></a></span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#971"><span class="ju-constructor">mkVerifiable</span></a></span> <span class="ju-delimiter">(</span>verify <span class="ju-keyword">:=</span> <span class="ju-keyword">\</span> <span class="ju-delimiter">{</span><span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">}</span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span id="977"><span class="annot"><a href="#977"><span class="annot"><a href="#977"><span class="ju-function">kudoIsVerifiable</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#970"><span class="ju-inductive">isVerifiable</span></a></span> <span class="annot"><a href="#950"><span class="ju-inductive">Kudo<span class="ju-delimiter">.</span>Resource</span></a></span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#971"><span class="ju-constructor">mkVerifiable</span></a></span> <span class="ju-delimiter">(</span>verify <span class="ju-keyword">:=</span> <span class="ju-keyword">\</span> <span class="ju-delimiter">{</span><span id="984"><span class="annot"><a href="#984"><span class="annot"><a href="#984"><span class="ju-var">k</span></a></span></a></span></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#972"><span class="ju-function">verify</span></a></span> <span class="annot"><a href="#955"><span class="ju-function"><span class="ju-delimiter">(</span>Kudo<span class="ju-delimiter">.</span>Resource<span class="ju-delimiter">.</span>value</span></a></span> <span class="annot"><a href="#984"><span class="ju-var">k</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">}</span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<h3 id="partial-transactions">Partial transactions<a class="headerlink" href="#partial-transactions" title="Permanent link">&para;</a></h3>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">type</span> <span id="978"><span class="annot"><a href="#978"><span class="annot"><a href="#978"><span class="ju-inductive">PartialTransaction</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span id="979"><span class="annot"><a href="#979"><span class="annot"><a href="#979"><span class="ju-constructor">mkPartialTransaction</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+    <span class="annot"><a href="#985"><span class="ju-var">input</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#950"><span class="ju-inductive">Kudo<span class="ju-delimiter">.</span>Resource</span></a></span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#986"><span class="ju-var">output</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#950"><span class="ju-inductive">Kudo<span class="ju-delimiter">.</span>Resource</span></a></span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#987"><span class="ju-var">extra</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#937"><span class="ju-function">Bytes</span></a></span>
+  <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">open</span> <span class="annot"><a href="#983"><span class="ju-var">PartialTransaction</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#988"><span class="ju-var">PTX</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#978"><span class="ju-inductive">PartialTransaction</span></a></span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<h2 id="evaluation-context">Evaluation context<a class="headerlink" href="#evaluation-context" title="Permanent link">&para;</a></h2>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">axiom</span> <span id="989"><span class="annot"><a href="#989"><span class="annot"><a href="#989"><span class="ju-axiom">env</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#962"><span class="ju-function">Kudo<span class="ju-delimiter">.</span>Env</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="990"><span class="annot"><a href="#990"><span class="annot"><a href="#990"><span class="ju-axiom">!</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-delimiter">{</span><span id="1032"><span class="annot"><a href="#1032"><span class="annot"><a href="#1032"><span class="ju-var">A</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span><span class="ju-delimiter">}</span> <span class="ju-keyword">-&gt;</span> <span class="annot"><a href="#1032"><span class="ju-var">A</span></a></span><span class="ju-delimiter">;</span>
+
+<span id="991"><span class="annot"><a href="#991"><span class="annot"><a href="#991"><span class="ju-function">kudo_logic</span></a></span></a></span></span> <span class="ju-delimiter">(</span><span class="annot"><a href="#1033"><span class="ju-var">ptx</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#978"><span class="ju-inductive">PartialTransaction</span></a></span><span class="ju-delimiter">)</span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span>
+  <span class="ju-keyword">let</span>
+    <span id="1034"><span class="annot"><a href="#1034"><span class="annot"><a href="#1034"><span class="ju-function">checkInputs</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span>
+      <span class="annot"><a href="#276"><span class="ju-function">all</span></a></span>
+        <span class="ju-keyword">λ</span> <span class="ju-delimiter">{</span><span id="1037"><span class="annot"><a href="#1037"><span class="annot"><a href="#1037"><span class="ju-var">ri</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+          <span class="ju-keyword">let</span>
+            <span id="1038"><span class="annot"><a href="#1038"><span class="annot"><a href="#1038"><span class="ju-function">cond1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#794"><span class="ju-function">member?</span></a></span> <span class="annot"><a href="#953"><span class="ju-function"><span class="ju-delimiter">(</span>Kudo<span class="ju-delimiter">.</span>Resource<span class="ju-delimiter">.</span>predicate</span></a></span> <span class="annot"><a href="#1037"><span class="ju-var">ri</span></a></span><span class="ju-delimiter">)</span> <span class="annot"><a href="#989"><span class="ju-axiom">env</span></a></span><span class="ju-delimiter">;</span>
+            <span id="1039"><span class="annot"><a href="#1039"><span class="annot"><a href="#1039"><span class="ju-function">cond2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">;</span>
+            <span id="1040"><span class="annot"><a href="#1040"><span class="annot"><a href="#1040"><span class="ju-function">cond3</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">;</span>
+          <span class="ju-keyword">in</span> <span class="annot"><a href="#1038"><span class="ju-function">cond1</span></a></span> <span class="annot"><a href="#38"><span class="ju-function">&amp;&amp;</span></a></span> <span class="annot"><a href="#36"><span class="ju-function">not</span></a></span> <span class="annot"><a href="#1039"><span class="ju-function"><span class="ju-delimiter">(</span>cond2</span></a></span> <span class="annot"><a href="#37"><span class="ju-function">||</span></a></span> <span class="annot"><a href="#1040"><span class="ju-function">cond3</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">}</span>
+        <span class="annot"><a href="#980"><span class="ju-function"><span class="ju-delimiter">(</span>input</span></a></span> <span class="annot"><a href="#1033"><span class="ju-var">ptx</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span id="1035"><span class="annot"><a href="#1035"><span class="annot"><a href="#1035"><span class="ju-function">checkOutput</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span>
+      <span class="annot"><a href="#276"><span class="ju-function">all</span></a></span>
+        <span class="ju-keyword">λ</span> <span class="ju-delimiter">{</span><span id="1043"><span class="annot"><a href="#1043"><span class="annot"><a href="#1043"><span class="ju-var">ri</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+          <span class="ju-keyword">let</span>
+            <span id="1044"><span class="annot"><a href="#1044"><span class="annot"><a href="#1044"><span class="ju-function">cond1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#794"><span class="ju-function">member?</span></a></span> <span class="annot"><a href="#953"><span class="ju-function"><span class="ju-delimiter">(</span>Kudo<span class="ju-delimiter">.</span>Resource<span class="ju-delimiter">.</span>predicate</span></a></span> <span class="annot"><a href="#1043"><span class="ju-var">ri</span></a></span><span class="ju-delimiter">)</span> <span class="annot"><a href="#989"><span class="ju-axiom">env</span></a></span><span class="ju-delimiter">;</span>
+            <span id="1045"><span class="annot"><a href="#1045"><span class="annot"><a href="#1045"><span class="ju-function">cond2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">;</span>
+            <span id="1046"><span class="annot"><a href="#1046"><span class="annot"><a href="#1046"><span class="ju-function">cond3</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">;</span>
+          <span class="ju-keyword">in</span> <span class="annot"><a href="#1044"><span class="ju-function">cond1</span></a></span> <span class="annot"><a href="#38"><span class="ju-function">&amp;&amp;</span></a></span> <span class="annot"><a href="#36"><span class="ju-function">not</span></a></span> <span class="annot"><a href="#1045"><span class="ju-function"><span class="ju-delimiter">(</span>cond2</span></a></span> <span class="annot"><a href="#37"><span class="ju-function">||</span></a></span> <span class="annot"><a href="#1046"><span class="ju-function">cond3</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">}</span>
+        <span class="annot"><a href="#981"><span class="ju-function"><span class="ju-delimiter">(</span>output</span></a></span> <span class="annot"><a href="#1033"><span class="ju-var">ptx</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span id="1036"><span class="annot"><a href="#1036"><span class="annot"><a href="#1036"><span class="ju-function">checkConnectiveValidity</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#32"><span class="ju-inductive">Bool</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#33"><span class="ju-constructor">true</span></a></span><span class="ju-delimiter">;</span>
+  <span class="ju-keyword">in</span> <span class="annot"><a href="#1034"><span class="ju-function">checkInputs</span></a></span> <span class="annot"><a href="#38"><span class="ju-function">&amp;&amp;</span></a></span> <span class="annot"><a href="#1035"><span class="ju-function">checkOutput</span></a></span> <span class="annot"><a href="#38"><span class="ju-function">&amp;&amp;</span></a></span> <span class="annot"><a href="#1036"><span class="ju-function">checkConnectiveValidity</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">instance</span>
+<span id="992"><span class="annot"><a href="#992"><span class="annot"><a href="#992"><span class="ju-function">partialVerifiable</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#970"><span class="ju-inductive">isVerifiable</span></a></span> <span class="annot"><a href="#978"><span class="ju-inductive">PartialTransaction</span></a></span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#971"><span class="ju-constructor">mkVerifiable</span></a></span> <span class="ju-delimiter">(</span>verify <span class="ju-keyword">:=</span> <span class="annot"><a href="#991"><span class="ju-function">kudo_logic</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">axiom</span> <span id="993"><span class="annot"><a href="#993"><span class="annot"><a href="#993"><span class="ju-axiom">agentA</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#938"><span class="ju-inductive">Owner</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="994"><span class="annot"><a href="#994"><span class="annot"><a href="#994"><span class="ju-axiom">sig_agentA1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="995"><span class="annot"><a href="#995"><span class="annot"><a href="#995"><span class="ju-axiom">type_sig_agentA1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="996"><span class="annot"><a href="#996"><span class="annot"><a href="#996"><span class="ju-axiom">sig_agentA2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="997"><span class="annot"><a href="#997"><span class="annot"><a href="#997"><span class="ju-axiom">type_sig_agentA2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="998"><span class="annot"><a href="#998"><span class="annot"><a href="#998"><span class="ju-axiom">agentB</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#938"><span class="ju-inductive">Owner</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="999"><span class="annot"><a href="#999"><span class="annot"><a href="#999"><span class="ju-axiom">sig_agentB1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="1000"><span class="annot"><a href="#1000"><span class="annot"><a href="#1000"><span class="ju-axiom">type_sig_agentB1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#934"><span class="ju-inductive">Signature</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="1001"><span class="annot"><a href="#1001"><span class="annot"><a href="#1001"><span class="ju-axiom">hash</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-delimiter">{</span><span id="1049"><span class="annot"><a href="#1049"><span class="annot"><a href="#1049"><span class="ju-var">A</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span><span class="ju-delimiter">}</span> <span class="ju-keyword">-&gt;</span> <span class="annot"><a href="#1049"><span class="ju-var">A</span></a></span> <span class="ju-keyword">-&gt;</span> <span class="annot"><a href="#932"><span class="ju-inductive">Hash</span></a></span><span class="ju-delimiter">;</span>
+
+<span id="1002"><span class="annot"><a href="#1002"><span class="annot"><a href="#1002"><span class="ju-function">valueA1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#958"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkValue</span></a></span> <span class="ju-delimiter">(</span>owner <span class="ju-keyword">:=</span> <span class="annot"><a href="#993"><span class="ju-axiom">agentA</span></a></span><span class="ju-delimiter">;</span> originator <span class="ju-keyword">:=</span> <span class="annot"><a href="#994"><span class="ju-axiom">sig_agentA1</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span id="1003"><span class="annot"><a href="#1003"><span class="annot"><a href="#1003"><span class="ju-function">kudoA1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#951"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkResource</span></a></span>
+    <span class="ju-delimiter">(</span>predicate <span class="ju-keyword">:=</span> <span class="annot"><a href="#990"><span class="ju-axiom">!</span></a></span><span class="ju-delimiter">;</span> label <span class="ju-keyword">:=</span> <span class="annot"><a href="#1001"><span class="ju-axiom">hash</span></a></span> <span class="annot"><a href="#993"><span class="ju-axiom">agentA</span></a></span><span class="ju-delimiter">;</span> quantity <span class="ju-keyword">:=</span> <span class="ju-number">1</span><span class="ju-delimiter">;</span> value <span class="ju-keyword">:=</span> <span class="annot"><a href="#1002"><span class="ju-function">valueA1</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span id="1004"><span class="annot"><a href="#1004"><span class="annot"><a href="#1004"><span class="ju-function">valueA2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#958"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkValue</span></a></span> <span class="ju-delimiter">(</span>owner <span class="ju-keyword">:=</span> <span class="annot"><a href="#993"><span class="ju-axiom">agentA</span></a></span><span class="ju-delimiter">;</span> originator <span class="ju-keyword">:=</span> <span class="annot"><a href="#996"><span class="ju-axiom">sig_agentA2</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span id="1005"><span class="annot"><a href="#1005"><span class="annot"><a href="#1005"><span class="ju-function">kudoA2</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#951"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkResource</span></a></span>
+    <span class="ju-delimiter">(</span>predicate <span class="ju-keyword">:=</span> <span class="annot"><a href="#990"><span class="ju-axiom">!</span></a></span><span class="ju-delimiter">;</span> label <span class="ju-keyword">:=</span> <span class="annot"><a href="#1001"><span class="ju-axiom">hash</span></a></span> <span class="annot"><a href="#993"><span class="ju-axiom">agentA</span></a></span><span class="ju-delimiter">;</span> quantity <span class="ju-keyword">:=</span> <span class="ju-number">1</span><span class="ju-delimiter">;</span> value <span class="ju-keyword">:=</span> <span class="annot"><a href="#1002"><span class="ju-function">valueA1</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span id="1006"><span class="annot"><a href="#1006"><span class="annot"><a href="#1006"><span class="ju-function">valueB1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#958"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkValue</span></a></span> <span class="ju-delimiter">(</span>owner <span class="ju-keyword">:=</span> <span class="annot"><a href="#998"><span class="ju-axiom">agentB</span></a></span><span class="ju-delimiter">;</span> originator <span class="ju-keyword">:=</span> <span class="annot"><a href="#1000"><span class="ju-axiom">type_sig_agentB1</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span id="1007"><span class="annot"><a href="#1007"><span class="annot"><a href="#1007"><span class="ju-function">kudoB1</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">_</span> <span class="ju-keyword">:=</span>
+  <span class="annot"><a href="#951"><span class="ju-constructor">Kudo<span class="ju-delimiter">.</span>mkResource</span></a></span>
+    <span class="ju-delimiter">(</span>predicate <span class="ju-keyword">:=</span> <span class="annot"><a href="#990"><span class="ju-axiom">!</span></a></span><span class="ju-delimiter">;</span> label <span class="ju-keyword">:=</span> <span class="annot"><a href="#1001"><span class="ju-axiom">hash</span></a></span> <span class="annot"><a href="#998"><span class="ju-axiom">agentB</span></a></span><span class="ju-delimiter">;</span> quantity <span class="ju-keyword">:=</span> <span class="ju-number">1</span><span class="ju-delimiter">;</span> value <span class="ju-keyword">:=</span> <span class="annot"><a href="#1006"><span class="ju-function">valueB1</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="1008"><span class="annot"><a href="#1008"><span class="annot"><a href="#1008"><span class="ju-axiom">Float</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#1009"><span class="ju-var">Weight</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#1008"><span class="ju-axiom">Float</span></a></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">type</span> <span id="1010"><span class="annot"><a href="#1010"><span class="annot"><a href="#1010"><span class="ju-inductive">ResourceIntentElement</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span class="ju-keyword">|</span> <span id="1011"><span class="annot"><a href="#1011"><span class="annot"><a href="#1011"><span class="ju-constructor">Resource</span></a></span></a></span></span>
+  <span class="ju-keyword">|</span> <span id="1012"><span class="annot"><a href="#1012"><span class="annot"><a href="#1012"><span class="ju-constructor">WantResourceType</span></a></span></a></span></span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">axiom</span> <span id="1014"><span class="annot"><a href="#1014"><span class="annot"><a href="#1014"><span class="ju-axiom">Term</span></a></span></a></span></span> <span class="ju-keyword">:</span> <span class="ju-keyword">Type</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">syntax</span> <span class="ju-keyword">alias</span> <span class="annot"><a href="#1015"><span class="ju-var">Connective</span></a></span> <span class="ju-keyword">:=</span> <span class="annot"><a href="#1014"><span class="ju-axiom">Term</span></a></span><span class="ju-delimiter">;</span></pre></code></pre>
+
+<h3 id="intents-over-kudos">Intents over Kudos<a class="headerlink" href="#intents-over-kudos" title="Permanent link">&para;</a></h3>
+<pre class="highlight"><code class="juvix"><pre class="src-content"><span class="ju-keyword">type</span> <span id="1016"><span class="annot"><a href="#1016"><span class="annot"><a href="#1016"><span class="ju-inductive">ResourceIntent</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span id="1017"><span class="annot"><a href="#1017"><span class="annot"><a href="#1017"><span class="ju-constructor">mkIntent</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+    <span class="annot"><a href="#1056"><span class="ju-var">have</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#1009"><span class="ju-axiom"><span class="ju-delimiter">(</span>Weight</span></a></span> <span class="annot"><a href="#136"><span class="ju-inductive">×</span></a></span> <span class="annot"><a href="#1010"><span class="ju-inductive">ResourceIntentElement</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#1057"><span class="ju-var">want</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#1009"><span class="ju-axiom"><span class="ju-delimiter">(</span>Weight</span></a></span> <span class="annot"><a href="#136"><span class="ju-inductive">×</span></a></span> <span class="annot"><a href="#1010"><span class="ju-inductive">ResourceIntentElement</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#1058"><span class="ju-var">connectives</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#1015"><span class="ju-axiom">Connective</span></a></span>
+  <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span>
+
+<span class="ju-keyword">type</span> <span id="1022"><span class="annot"><a href="#1022"><span class="annot"><a href="#1022"><span class="ju-inductive">KudoIntentElement</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span class="ju-keyword">|</span> <span id="1023"><span class="annot"><a href="#1023"><span class="annot"><a href="#1023"><span class="ju-constructor">KudoResource</span></a></span></a></span></span>
+  <span class="ju-keyword">|</span> <span id="1024"><span class="annot"><a href="#1024"><span class="annot"><a href="#1024"><span class="ju-constructor">WantKudoResourceType</span></a></span></a></span></span><span class="ju-delimiter">;</span>
+
+<span class="ju-judoc">{--</span> <span class="ju-judoc">Each Agent can produce intents over which Kudos they have and which Kudos</span>
+<span class="ju-judoc">  they want, for arbitrary size vectors of both.</span> <span class="ju-judoc">--}</span>
+<span class="ju-keyword">type</span> <span id="1026"><span class="annot"><a href="#1026"><span class="annot"><a href="#1026"><span class="ju-inductive">KudoIntent</span></a></span></a></span></span> <span class="ju-keyword">:=</span>
+  <span id="1027"><span class="annot"><a href="#1027"><span class="annot"><a href="#1027"><span class="ju-constructor">mkKudoIntent</span></a></span></a></span></span> <span class="ju-delimiter">{</span>
+    <span class="annot"><a href="#1059"><span class="ju-var">have</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#1009"><span class="ju-axiom"><span class="ju-delimiter">(</span>Weight</span></a></span> <span class="annot"><a href="#136"><span class="ju-inductive">×</span></a></span> <span class="annot"><a href="#1022"><span class="ju-inductive">KudoIntentElement</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#1060"><span class="ju-var">want</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#249"><span class="ju-inductive">List</span></a></span> <span class="annot"><a href="#1009"><span class="ju-axiom"><span class="ju-delimiter">(</span>Weight</span></a></span> <span class="annot"><a href="#136"><span class="ju-inductive">×</span></a></span> <span class="annot"><a href="#1022"><span class="ju-inductive">KudoIntentElement</span></a></span><span class="ju-delimiter">)</span><span class="ju-delimiter">;</span>
+    <span class="annot"><a href="#1061"><span class="ju-var">connectives</span></a></span> <span class="ju-keyword">:</span> <span class="annot"><a href="#1015"><span class="ju-axiom">Connective</span></a></span>
+  <span class="ju-delimiter">}</span><span class="ju-delimiter">;</span></pre></code></pre>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.action.edit", "content.action.view"], "search": "../assets/javascripts/workers/search.f886a092.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6c14ae12.min.js"></script>
+      
+    
+  </body>
+</html>
